@@ -1,20 +1,19 @@
-import { ServicioHabitacion } from "../Services/ServicioHabitacion.js"
 import { ServicioReserva } from "../Services/ServicioReserva.js"
 
 
-export class ControladorHabitacion{
+export class ControladorReserva{
 
     constructor(){}
     
-     async buscarHabitacion(request,res){
+     async buscarReserva(request,res){
 
-            let objetoServicioHabitacion = new ServicioHabitacion() 
+            let objetoServicioReservas = new ServicioReserva() 
        
         
             try{
                 res.status(200).json({
                     "mensaje":"exito en la consulta",
-                    "datos": await objetoServicioHabitacion.buscarHabitaciones(),
+                    "datos": await objetoServicioReservas.ServicioReserva(),
                 })
 
             }catch(e){
@@ -27,16 +26,16 @@ export class ControladorHabitacion{
         
       }
       
-        async buscarHabitacionPorId(request,res){
+        async buscarReservaPorId(request,res){
             let datosurl = request.params.id
-            let objetoServicioHabitacion = new ServicioHabitacion()
+            let objetoServicioReservas = new ServicioReserva()
          
         
                 try{
 
                     res.status(200).json({
                         "mensaje":"exito en la consulta" + datosurl,
-                        "datos": await objetoServicioHabitacion.buscarHabitacionesId(datosurl)
+                        "datos": await objetoServicioReservas.buscarReservaId(datosurl)
                     })
 
                 }catch(e){
@@ -51,17 +50,17 @@ export class ControladorHabitacion{
                 }
             }
     
-      async  RegistrarHabitacion(request,res){
+      async  RegistrarReserva(request,res){
 
-            let datosHabitacion=request.body 
-            let objetoServicioHabitacion = new ServicioHabitacion()
+            let datosReserva=request.body 
+            let objetoServicioReservas = new ServicioReserva()
          
 
             try{
-                await objetoServicioHabitacion.agregarHabitacionBd(datosHabitacion)
+                await objetoServicioReservas.agregarReservaBd(datosReserva)
                 res.status(200).json({
                     "mensaje":"exito en la registro",
-                    "datos":objetoServicioHabitacion.agregarHabitacionBd(),
+                    "datos":objetoServicioReservas.agregarReservaBd(),
                 })
 
             }catch(e){
@@ -73,16 +72,16 @@ export class ControladorHabitacion{
         }
 
        async EditarReserva(req,res){
-            let id =req.params.id
+            let id =req.params.idHabitacion
             let datosHabitacion = req.body
-            let objetoServicioReservas = new ServicioReserva()
+            let objetoServicioHabitacion = new ServicioHabitacion()
             
 
             try{
                
                 res.status(200).json({
                     "mensaje":"exito  editando "+id,
-                    "datos": await objetoServicioReservas.EditarReservas(id,datosHabitacion)
+                    "datos": await objetoServicioHabitacion.EditarHabitacion(id,datosHabitacion)
                 })
 
             }catch(e){
